@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
     table.text('meal_description').notNullable()
     table.timestamp('meal_created_at').defaultTo(knex.fn.now()).notNullable()
     table.text('meal_diet').notNullable()
-    table.integer('user_id').unsigned().notNullable(); 
+    table.integer('user_id').unsigned() 
 
     table
     .foreign('user_id')

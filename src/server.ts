@@ -1,26 +1,22 @@
 import  { fastify } from "fastify";
 import { knex } from "./database";
-import Crypto from 'node:crypto'
+import { z } from 'zod'
+import { registerRoutes } from './routes/register'
 
 const app = fastify()
 
+app.register(registerRoutes)
 
-app.get('/hello', async ()=> {
-const tables = await knex('sqlite_schema').select('*')
 
-return tables
 
-})
-
-app.post('/users', async ()=> {
-  const newUser = await knex.insert(
-    {
-      id:Crypto.randomUUID(),
-      name: String,
-      email: String
-    }
-  ) 
-})
+// app.post('/users', async () => {
+//   const newUser = await knex.insert({
+//     id: z.number(),
+//     name: z.string(),
+//     email: z.string()
+//   })
+//   return 
+// })
 
 
 app.listen({
